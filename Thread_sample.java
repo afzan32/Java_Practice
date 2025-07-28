@@ -5,10 +5,9 @@ class car extends Thread {
             System.out.println("car is going");
             try {
                 Thread.sleep(10);
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
+                e.addSuppressed(e);
             }
-
-            
     }
 }}
 
@@ -19,7 +18,8 @@ class bike extends Thread {
   System.out.println("bike is going");
    try {
           Thread.sleep(2);
-      } catch (Exception e) {
+      } catch (InterruptedException e) {
+        e.addSuppressed(e);
       }
         }
      
@@ -32,6 +32,14 @@ public class Thread_sample {
         bike mybike = new bike();
         mybike.setPriority(10);
         mycar.start();
-        mybike.start();
+         mybike.start();
+        
+        try {
+             mycar.join();
+        } catch (Exception e) {
+        }
+       
+       
+        System.out.println("Hi afzan");
     }
 }
